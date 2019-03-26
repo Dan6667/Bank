@@ -11,11 +11,19 @@ import java.util.ArrayList;
 
 @Component
 public class Bank {
-
-    private static ArrayList<Customer> customers = new ArrayList<>();
+    private ArrayList<Customer> customers = new ArrayList<>();
     private static ApplicationContext context;
 
-    public void openBill(Customer customer, Bills type, String name, long money) {
+
+    /* In some other classes we will needed in customers or their bills.
+    We provide this method to give them access to those fields through getters.
+    In spring this class is singleton by default.
+     */
+    public static Bank getBank(){
+        return context.getBean(Bank.class);
+    }
+
+    private void openBill(Customer customer, Bills type, String name, long money) {
         Bill bill;
         switch (type) {
             case SIMPLE:
@@ -34,15 +42,19 @@ public class Bank {
         customer.addBill(bill);
     }
 
+    /*
+    Creating beans in main method is not really good, but here it is used to
+    check how application works entirely. Later this application will be expanded
+    to web application, so bean creation will be removed from main method.
+     */
     public static void main(String... args) {
         context = new AnnotationConfigApplicationContext(BankConfiguration.class);
 
         Bank bank = context.getBean(Bank.class);
-        //TimeManager timeManager = context.getBean(TimeManager.class);
 
         Customer customer1 = context.getBean(Customer.class);
         customer1.setName("John Jones");
-        customers.add(customer1);
+        bank.customers.add(customer1);
 
         bank.openBill(customer1, Bills.SIMPLE, "Just a bill", 10_000);
         bank.openBill(customer1, Bills.CREDIT, "First credit bill", 0);
@@ -51,41 +63,22 @@ public class Bank {
 
         Customer customer2 = context.getBean(Customer.class);
         customer2.setName("Sam Smith");
-        customers.add(customer2);
+        bank.customers.add(customer2);
 
         bank.openBill(customer2, Bills.SIMPLE, "Just a bill again", 20_000);
         bank.openBill(customer2, Bills.DEPOSIT, "My deposit bill", 1_000_000);
 
     }
 
-//    @Lookup
-//    public Customer getCustomer(){
-//        return null;
-//    }
-//
-//    @Lookup
-//    public SimpleBill getSimpleBill(){
-//        return null;
-//    }
-//    @Lookup
-//    public CreditBill getCreditBill(){
-//        return null;
-//    }
-//    @Lookup
-//    public DepositBill getDepositBill(){
-//        return null;
-//    }
-
-    public static ArrayList<Customer> getCustomers() {
+    public ArrayList<Customer> getCustomers() {
         return customers;
     }
 
-    public static ArrayList<Bill> getBills(){
+    public ArrayList<Bill> getBills(){
         ArrayList<Bill> bills = new ArrayList<>();
 
         for(Customer customer: customers){
-            for(Bill bill: customer.getBills())
-                bills.add(bill);
+            bills.addAll(customer.getBills());
         }
         return bills;
     }

@@ -13,10 +13,12 @@ import java.util.ArrayList;
 @Component
 public class Logger {
 
-    private ArrayList<Customer> customers = Bank.getCustomers();
+    private ArrayList<Customer> customers;
 
+    //Printing information about customers and their bills
     @AfterReturning("execution(void bank.timeManagement.TimeManager.start())")
     public void billsUpdated(){
+        customers = Bank.getBank().getCustomers();
         for(Customer customer: customers){
             System.out.println("Customers name: " + customer.getName());
             System.out.println("Customer has " + customer.getBillsAmount() + " bills\n");
