@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Here we declare namespaces-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- ID of project's group-->
+    <groupId>bank</groupId>
+    <!-- ID of particular project (artifact)-->
+    <artifactId>bank</artifactId>
+    <!-- Version of our project. "Snapshot" means it's not final version of the project-->
+    <version>1.0-SNAPSHOT</version>
+    <!-- Here we declare that our package is web archive-->
+    <packaging>war</packaging>
+
+    <!-- properties of the project-->
+    <properties>
+        <!-- Declare encoding-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Specify particular version of JDK-->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- Versions -->
+        <junit.version>4.11</junit.version>
+        <hibernate.version>5.4.2.Final</hibernate.version>
+        <h2.version>1.4.199</h2.version>
+        <spring.version>5.1.6.RELEASE</spring.version>
+        <aspectj.version>1.9.3</aspectj.version>
+        <swagger.version>2.9.2</swagger.version>
+        <slf4j.version>1.7.26</slf4j.version>
+    </properties>
+
+    <!-- Some third-party libraries for our project-->
+    <dependencies>
+        <!--Framework for testing, IDEA puts it in POM by default -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <!--Maven is build up around lifecycles. Each lifecycle consist of phases, such as test, package, install, deploy etc.
+            This property indicates that this dependency will not affect normal use of application.
+            It will only be used for test compilation and execution phases.-->
+            <scope>test</scope>
+        </dependency>
+        <!-- Further dependencies have the same structure-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+            <!-- This scope indicates that this dependency is required for execution and not required for compilation-->
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+    </dependencies>
+</project>
