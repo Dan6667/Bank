@@ -29,6 +29,8 @@
         <aspectj.version>1.9.3</aspectj.version>
         <swagger.version>2.9.2</swagger.version>
         <slf4j.version>1.7.26</slf4j.version>
+        <maven-compiler-pligin.version>2.3.2</maven-compiler-pligin.version>
+        <maven-war-plugin.version>2.4</maven-war-plugin.version>
     </properties>
 
     <!-- Some third-party libraries for our project-->
@@ -97,4 +99,27 @@
             <version>${slf4j.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>Bank</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-pligin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven-war-plugin.version}</version>
+                    <configuration>
+                        <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                        <warName>Bank</warName>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

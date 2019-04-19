@@ -22,6 +22,6 @@ public class RegisterController {
     public String registerProcessing(Client client){
         new ClientDao().saveClient(client);
         bank.addClient(client);
-        return "index";
+        return "home";
     }
 }
