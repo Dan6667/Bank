@@ -83,12 +83,31 @@ public class Bank {
         billDao.saveBill(client2.getBill("My deposit bill"));
     }
 
+    public void newClient(String name){
+        Client client = context.getBean(Client.class);
+        client.setName(name);
+        clients.add(client);
+    }
+
+    public void addClient(Client client){
+        clients.add(client);
+        new ClientDao().saveClient(client);
+    }
+
     public List<Client> getClients() {
         if(clients.size() == 0){
             ClientDao clientDao = new ClientDao();
             clients =  clientDao.getClients();
         }
         return clients;
+    }
+
+    public Client getClient(long id){
+        for(Client client: clients){
+            if(client.getId() == id)
+                return client;
+        }
+        return null;
     }
 
     public ArrayList<Bill> getBills(){
