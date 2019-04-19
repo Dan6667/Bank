@@ -1,6 +1,7 @@
 package bank.controller;
 
 import bank.Bank;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/clients")
 public class ClientController {
-    Bank bank = Bank.getBank();
+    private Bank bank;
+
+    @Autowired
+    public ClientController(Bank bank){
+        this.bank = bank;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public String getClients(Model model){

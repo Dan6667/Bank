@@ -23,6 +23,8 @@ public class Bank {
     In spring this class is singleton by default.
      */
     public static Bank getBank(){
+        if(context == null)
+            context = new AnnotationConfigApplicationContext(BankConfiguration.class);
         return context.getBean(Bank.class);
     }
 
