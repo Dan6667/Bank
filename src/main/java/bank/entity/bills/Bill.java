@@ -1,9 +1,10 @@
 package bank.entity.bills;
 
-import bank.dao.BillDao;
+//import bank.dao.BillDao;
 import bank.entity.clients.Client;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "bill")
@@ -13,10 +14,10 @@ import javax.persistence.*;
         discriminatorType=DiscriminatorType.STRING
 )
 @DiscriminatorValue(value="B")
-public abstract class Bill {
+public abstract class Bill implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "bill_id")
     private int id;
 
@@ -45,10 +46,7 @@ public abstract class Bill {
 
     Bill(){}
 
-    public void update(){
-        BillDao billDao = new BillDao();
-        billDao.updateBill(this);
-    }
+    public abstract void update();
 
     public abstract double takeMoney(double amount);
 
@@ -74,5 +72,9 @@ public abstract class Bill {
 
     public void setOwner(Client owner) {
         this.owner = owner;
+    }
+
+    public int getId() {
+        return id;
     }
 }

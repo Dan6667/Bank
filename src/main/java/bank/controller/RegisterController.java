@@ -1,12 +1,13 @@
 package bank.controller;
 
 import bank.Bank;
-import bank.dao.ClientDao;
 import bank.entity.clients.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+//import bank.dao.ClientDao;
 
 @Controller
 @RequestMapping("/register")
@@ -26,7 +27,6 @@ public class RegisterController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String registerProcessing(Client client){
-        new ClientDao().saveClient(client);
         bank.addClient(client);
         return "home";
     }

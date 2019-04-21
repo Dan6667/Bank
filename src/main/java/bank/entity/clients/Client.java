@@ -3,16 +3,17 @@ package bank.entity.clients;
 import bank.entity.bills.Bill;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Entity
 @Table(name = "client")
-public class Client {
+public class Client implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "client_id")
     private int id;
 
@@ -48,6 +49,14 @@ public class Client {
     public Bill getBill(String name){
         for(Bill bill: bills){
             if(bill.getName().equals(name))
+                return bill;
+        }
+        throw new NoSuchElementException();
+    }
+
+    public Bill getBill(long id){
+        for(Bill bill: bills){
+            if(bill.getId() == id)
                 return bill;
         }
         throw new NoSuchElementException();

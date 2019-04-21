@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/clients")
+@RequestMapping("/")
 public class ClientController {
     private Bank bank;
 
@@ -18,7 +18,7 @@ public class ClientController {
         this.bank = bank;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/clients", method = RequestMethod.GET)
     public String getClients(Model model){
         model.addAttribute(bank.getClients());
         return "clients";

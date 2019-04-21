@@ -40,6 +40,5 @@ public class CreditBill extends Bill{
         if(money < 0){
             money *= creditRate;
         }
-        super.update();
     }
 }

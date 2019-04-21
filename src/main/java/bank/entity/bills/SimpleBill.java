@@ -33,7 +33,6 @@ public class SimpleBill extends Bill{
 
     @Override
     public void update(){
-        super.update();
     }
 
 }

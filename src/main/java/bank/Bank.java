@@ -1,10 +1,12 @@
 package bank;
 
 import bank.config.BankConfiguration;
-import bank.dao.BillDao;
-import bank.dao.ClientDao;
+//import bank.dao.BillDao;
+//import bank.dao.ClientDao;
 import bank.entity.bills.*;
 import bank.entity.clients.Client;
+import bank.service.BillService;
+import bank.service.ClientService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
@@ -28,7 +30,8 @@ public class Bank {
         return context.getBean(Bank.class);
     }
 
-    private void openBill(Client client, Bills type, String name, long money) {
+    public void openBill(Client client, Bills type, String name, long money) {
+        BillService billService = context.getBean(BillService.class);
         Bill bill;
         switch (type) {
             case SIMPLE:
@@ -46,6 +49,8 @@ public class Bank {
         bill.setName(name);
         bill.setOwner(client);
         client.addBill(bill);
+
+        billService.createBill(bill);
     }
 
     /*
@@ -55,51 +60,39 @@ public class Bank {
      */
     public static void main(String... args) {
         context = new AnnotationConfigApplicationContext(BankConfiguration.class);
-        ClientDao clientDao = new ClientDao();
-        BillDao billDao = new BillDao();
-
         Bank bank = context.getBean(Bank.class);
 
-        Client client1 = context.getBean(Client.class);
-        client1.setName("John Jones");
-        clientDao.saveClient(client1);
-        bank.clients.add(client1);
+        Client client1 = bank.newClient("John Jones");
 
         bank.openBill(client1, Bills.SIMPLE, "Just a bill", 10_000);
         bank.openBill(client1, Bills.CREDIT, "First credit bill", 0);
         CreditBill creditBill = (CreditBill) client1.getBill("First credit bill");
         creditBill.takeMoney(10_000);
-        billDao.saveBill(creditBill);
-        billDao.saveBill(client1.getBill("Just a bill"));
 
 
-        Client client2 = context.getBean(Client.class);
-        client2.setName("Sam Smith");
-        clientDao.saveClient(client2);
-        bank.clients.add(client2);
+        Client client2 = bank.newClient("Sam Smith");
 
         bank.openBill(client2, Bills.SIMPLE, "Just a bill again", 20_000);
         bank.openBill(client2, Bills.DEPOSIT, "My deposit bill", 1_000_000);
 
-        billDao.saveBill(client2.getBill("Just a bill again"));
-        billDao.saveBill(client2.getBill("My deposit bill"));
     }
 
-    public void newClient(String name){
+    public Client newClient(String name){
         Client client = context.getBean(Client.class);
         client.setName(name);
         clients.add(client);
+        context.getBean(ClientService.class).createClient(client);
+        return client;
     }
 
     public void addClient(Client client){
         clients.add(client);
-        new ClientDao().saveClient(client);
+        context.getBean(ClientService.class).createClient(client);
     }
 
     public List<Client> getClients() {
         if(clients.size() == 0){
-            ClientDao clientDao = new ClientDao();
-            clients =  clientDao.getClients();
+            clients = context.getBean(ClientService.class).findAllClients();
         }
         return clients;
     }
@@ -116,13 +109,21 @@ public class Bank {
         ArrayList<Bill> bills = new ArrayList<>();
 
         if(clients.size() == 0){
-            ClientDao clientDao = new ClientDao();
-            clients =  clientDao.getClients();
+            clients = getClients();
         }
 
         for(Client customer: clients){
             bills.addAll(customer.getBills());
         }
         return bills;
+    }
+
+    public void updateBills(){
+        List<Bill> bills = getBills();
+
+        for(Bill bill: bills){
+            bill.update();
+            context.getBean(BillService.class).updateBill(bill);
+        }
     }
 }

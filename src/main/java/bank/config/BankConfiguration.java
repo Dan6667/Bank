@@ -1,7 +1,7 @@
 package bank.config;
 
-import bank.dao.BillDao;
-import bank.dao.ClientDao;
+//import bank.dao.BillDao;
+//import bank.dao.ClientDao;
 import bank.entity.bills.CreditBill;
 import bank.entity.bills.DepositBill;
 import bank.entity.bills.SimpleBill;
@@ -41,17 +41,17 @@ public class BankConfiguration {
         return new CreditBill();
     }
 
-    @Bean
-    @Scope("prototype")
-    public ClientDao clientDao(){
-        return new ClientDao();
-    }
-
-    @Bean
-    @Scope("prototype")
-    public BillDao billDao(){
-        return new BillDao();
-    }
+//    @Bean
+//    @Scope("prototype")
+//    public ClientDao clientDao(){
+//        return new ClientDao();
+//    }
+//
+//    @Bean
+//    @Scope("prototype")
+//    public BillDao billDao(){
+//        return new BillDao();
+//    }
 
     @Bean
     public TaskScheduler taskScheduler() {

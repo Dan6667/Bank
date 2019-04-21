@@ -40,6 +40,5 @@ public class DepositBill extends Bill {
         if(money >= depositLimit){
             money *= increasingRate;
         }
-        super.update();
     }
 }
