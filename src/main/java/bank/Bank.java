@@ -74,7 +74,6 @@ public class Bank {
 
         bank.openBill(client2, Bills.SIMPLE, "Just a bill again", 20_000);
         bank.openBill(client2, Bills.DEPOSIT, "My deposit bill", 1_000_000);
-
     }
 
     public Client newClient(String name){

@@ -29,6 +29,7 @@
         <aspectj.version>1.9.3</aspectj.version>
         <swagger.version>2.5.0</swagger.version>
         <slf4j.version>1.7.26</slf4j.version>
+        <jstl.version>1.2</jstl.version>
         <maven-compiler-pligin.version>2.3.2</maven-compiler-pligin.version>
         <maven-war-plugin.version>2.4</maven-war-plugin.version>
     </properties>
@@ -101,7 +102,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${jstl.version}</version>
         </dependency>
     </dependencies>
 
