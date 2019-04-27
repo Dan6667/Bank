@@ -9,7 +9,7 @@ import java.util.List;
 
 public abstract class AbstractHibernateDao<T extends Serializable> {
 
-    private Class<T> clazz;
+    protected Class<T> clazz;
 
 //    SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 

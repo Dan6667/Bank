@@ -14,8 +14,8 @@ public class Client implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "client_id")
-    private int id;
+    @Column(name = "id")
+    private long id;
 
     @Column(name = "name")
     private String name;
@@ -44,6 +44,7 @@ public class Client implements Serializable {
 
     public void addBill(Bill bill){
         bills.add(bill);
+        bill.update();
     }
 
     public Bill getBill(String name){
@@ -66,7 +67,7 @@ public class Client implements Serializable {
         return bills.remove(bill);
     }
 
-    public int getId(){
+    public long getId(){
         return id;
     }
 }

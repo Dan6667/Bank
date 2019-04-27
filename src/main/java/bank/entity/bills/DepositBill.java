@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PERSON")
+@Table(name = "bill")
 @DiscriminatorValue("D")
 public class DepositBill extends Bill {
 
@@ -30,6 +30,7 @@ public class DepositBill extends Bill {
     public double takeMoney(double amount){
         if(amount - money > 0){
             money -= amount;
+            bank.updateBill(this);
             return amount;
         }
         return 0;

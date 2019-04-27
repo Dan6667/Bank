@@ -1,7 +1,8 @@
 package bank.service;
 
-import bank.dao.AbstractHibernateDao;
+import bank.dao.GenericHibernateDao;
 import bank.entity.bills.Bill;
+import bank.entity.clients.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,16 +10,20 @@ import java.util.List;
 
 @Service
 public class BillService implements IBillService {
-    private AbstractHibernateDao<Bill> dao;
+    private GenericHibernateDao<Bill> dao;
 
     @Autowired
-    public void setDao(AbstractHibernateDao<Bill> daoToSet) {
+    public void setDao(GenericHibernateDao<Bill> daoToSet) {
         dao = daoToSet;
         dao.setClazz(Bill.class);
     }
 
     public Bill findBill(final long id){
         return dao.findOne(id);
+    }
+
+    public List<Bill> findClientBills(Client client){
+        return dao.findEntityWhere(client);
     }
 
     public List<Bill> findAllBills(){

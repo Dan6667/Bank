@@ -1,7 +1,10 @@
 package bank.entity.bills;
 
 //import bank.dao.BillDao;
+
+import bank.Bank;
 import bank.entity.clients.Client;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,16 +19,20 @@ import java.io.Serializable;
 @DiscriminatorValue(value="B")
 public abstract class Bill implements Serializable {
 
+    @Transient
+    @Autowired
+    Bank bank;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "bill_id")
-    private int id;
+    @Column(name = "id")
+    private long id;
 
     @Column(name = "money")
     double money;
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "type")
     public Bills type;
@@ -74,7 +81,7 @@ public abstract class Bill implements Serializable {
         this.owner = owner;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 }

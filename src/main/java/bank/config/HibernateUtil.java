@@ -27,7 +27,13 @@ public class HibernateUtil {
                 settings.put(Environment.PASS, "    ");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.H2Dialect");
                 settings.put(Environment.SHOW_SQL, "false");
-                settings.put(Environment.HBM2DDL_AUTO, "create-drop");
+                settings.put(Environment.HBM2DDL_AUTO, "update");
+                settings.put(Environment.ENABLE_LAZY_LOAD_NO_TRANS, true);
+//                settings.put(Environment.CONNECTION_PROVIDER, org.hibernate.connection.C3P0ConnectionProvider.class);
+//                settings.put(Environment.C3P0_ACQUIRE_INCREMENT, 1);
+//                settings.put(Environment.C3P0_IDLE_TEST_PERIOD, 60);
+
+
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(Bill.class);
                 configuration.addAnnotatedClass(SimpleBill.class);

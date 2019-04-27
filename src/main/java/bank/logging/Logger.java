@@ -5,6 +5,7 @@ import bank.entity.bills.Bill;
 import bank.entity.clients.Client;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,11 +15,13 @@ import java.util.List;
 public class Logger {
 
     private List<Client> clients;
+    @Autowired
+    private Bank bank;
 
     //Printing information about customers and their bills
     @AfterReturning("execution(void bank.timeManagement.TimeManager.start())")
     public void billsUpdated(){
-        clients = Bank.getBank().getClients();
+        clients = bank.getClients();
         for(Client customer: clients){
             System.out.println("Customers name: " + customer.getName());
             System.out.println("Customer has " + customer.getBillsAmount() + " bills\n");

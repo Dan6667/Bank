@@ -1,8 +1,6 @@
 package bank;
 
 import bank.config.BankConfiguration;
-//import bank.dao.BillDao;
-//import bank.dao.ClientDao;
 import bank.entity.bills.*;
 import bank.entity.clients.Client;
 import bank.service.BillService;
@@ -11,22 +9,23 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
+
+//import bank.dao.BillDao;
+//import bank.dao.ClientDao;
 
 @Component
 public class Bank {
-    private List<Client> clients = new ArrayList<>();
-    private static ApplicationContext context;
+    private static ApplicationContext context = new AnnotationConfigApplicationContext(BankConfiguration.class);
 
 
     /* In some other classes we will needed in customers or their bills.
     We provide this method to give them access to those fields through getters.
     In spring this class is singleton by default.
      */
-    public static Bank getBank(){
-        if(context == null)
-            context = new AnnotationConfigApplicationContext(BankConfiguration.class);
+    public static Bank getBank() {
+//        if (context == null)
+//            context = new AnnotationConfigApplicationContext(BankConfiguration.class);
         return context.getBean(Bank.class);
     }
 
@@ -59,7 +58,6 @@ public class Bank {
     to web application, so bean creation will be removed from main method.
      */
     public static void main(String... args) {
-        context = new AnnotationConfigApplicationContext(BankConfiguration.class);
         Bank bank = context.getBean(Bank.class);
 
         Client client1 = bank.newClient("John Jones");
@@ -76,53 +74,44 @@ public class Bank {
         bank.openBill(client2, Bills.DEPOSIT, "My deposit bill", 1_000_000);
     }
 
-    public Client newClient(String name){
+    public Client newClient(String name) {
         Client client = context.getBean(Client.class);
         client.setName(name);
-        clients.add(client);
         context.getBean(ClientService.class).createClient(client);
         return client;
     }
 
-    public void addClient(Client client){
-        clients.add(client);
+    public void addClient(Client client) {
         context.getBean(ClientService.class).createClient(client);
     }
 
     public List<Client> getClients() {
-        if(clients.size() == 0){
-            clients = context.getBean(ClientService.class).findAllClients();
-        }
-        return clients;
+        return context.getBean(ClientService.class).findAllClients();
     }
 
-    public Client getClient(long id){
-        for(Client client: clients){
-            if(client.getId() == id)
-                return client;
-        }
-        return null;
+    public Client getClient(long id) {
+        return context.getBean(ClientService.class).findClient(id);
     }
 
-    public ArrayList<Bill> getBills(){
-        ArrayList<Bill> bills = new ArrayList<>();
-
-        if(clients.size() == 0){
-            clients = getClients();
-        }
-
-        for(Client customer: clients){
-            bills.addAll(customer.getBills());
-        }
-        return bills;
+    public List<Bill> getBills() {
+        return context.getBean(BillService.class).findAllBills();
     }
 
-    public void updateBills(){
+    public void updateBills() {
         List<Bill> bills = getBills();
 
-        for(Bill bill: bills){
-            bill.update();
-            context.getBean(BillService.class).updateBill(bill);
-        }
+        if (bills != null && bills.size() > 0)
+            for (Bill bill : bills) {
+                bill.update();
+                context.getBean(BillService.class).updateBill(bill);
+            }
+    }
+
+    public void updateBill(Bill bill){
+        context.getBean(BillService.class).updateBill(bill);
+    }
+
+    public void addBill(Bill bill){
+        context.getBean(BillService.class).createBill(bill);
     }
 }
