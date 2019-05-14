@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+
 @Controller
 @RequestMapping("/")
 public class ClientController {
@@ -27,6 +29,7 @@ public class ClientController {
     @RequestMapping(value = "/{clientId}", method = RequestMethod.GET)
     public String getClient(@PathVariable("clientId") long clientId, Model model){
         model.addAttribute(bank.getClient(clientId));
+        model.addAttribute(new ArrayList<>(bank.getClient(clientId).getBills()));
         return "client";
     }
 

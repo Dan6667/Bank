@@ -2,6 +2,7 @@ package bank.dao;
 
 import bank.config.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.io.Serializable;
@@ -11,7 +12,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
 
     protected Class<T> clazz;
 
-//    SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     public final void setClazz(Class<T> clazzToSet) {
         this.clazz = clazzToSet;

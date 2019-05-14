@@ -24,7 +24,7 @@ public abstract class Bill implements Serializable {
     Bank bank;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
@@ -39,7 +39,7 @@ public abstract class Bill implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="client_id")
-    public Client owner;
+    private Client owner;
 
     Bill(String name){
         money = 0;

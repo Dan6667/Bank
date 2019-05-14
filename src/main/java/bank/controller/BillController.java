@@ -5,9 +5,11 @@ import bank.entity.bills.CreditBill;
 import bank.entity.bills.DepositBill;
 import bank.entity.bills.SimpleBill;
 import bank.entity.clients.Client;
+import bank.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/{clientId}")
 public class BillController {
     private Bank bank;
+
+    @Autowired
+    private BillService billService;
+
 
     @Autowired
     public BillController(Bank bank){
@@ -35,27 +41,33 @@ public class BillController {
     }
 
     @RequestMapping(value = "/simple", method = RequestMethod.POST)
-    public String createSimpleBill(@PathVariable("clientId") long clientId, SimpleBill bill){
+    public String createSimpleBill(@PathVariable("clientId") long clientId, SimpleBill bill, ModelMap model){
         Client client = bank.getClient(clientId);
-        client.addBill(bill);
         bill.setOwner(client);
-        return "redirect: http://localhost:8080/bank_war_exploded/client";
+        client.addBill(bill);
+        billService.createBill(bill);
+        model.addAttribute(client);
+        return "redirect:/{clientId}";
     }
 
     @RequestMapping(value = "/credit", method = RequestMethod.POST)
-    public String createCreditBill(@PathVariable("clientId") long clientId, CreditBill bill){
+    public String createCreditBill(@PathVariable("clientId") long clientId, CreditBill bill, Model model){
         Client client = bank.getClient(clientId);
-        client.addBill(bill);
         bill.setOwner(client);
-        return "client";
+        client.addBill(bill);
+        billService.createBill(bill);
+        model.addAttribute(client);
+        return "redirect:/{clientId}";
     }
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
-    public String createDepositBill(@PathVariable("clientId") long clientId, DepositBill bill){
+    public String createDepositBill(@PathVariable("clientId") long clientId, DepositBill bill, Model model){
         Client client = bank.getClient(clientId);
-        client.addBill(bill);
         bill.setOwner(client);
-        return "client";
+        client.addBill(bill);
+        billService.createBill(bill);
+        model.addAttribute(client);
+        return "redirect:/{clientId}";
     }
 
     @RequestMapping(value = "/simple", method = RequestMethod.GET)

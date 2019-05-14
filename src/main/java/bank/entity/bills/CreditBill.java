@@ -5,13 +5,16 @@ import bank.BillRates;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "bill")
 @DiscriminatorValue("C")
 public class CreditBill extends Bill{
 
+    @Transient
     private double creditRate = BillRates.CREDIT_RATE;
+    @Transient
     private double creditLimit = BillRates.CREDIT_LIMIT;
 
     public CreditBill(String name){
