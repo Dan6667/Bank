@@ -1,6 +1,6 @@
 package bank.service;
 
-import bank.entity.clients.Client;
+import bank.entities.clients.Client;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
-package bank.entity.bills;
+package bank.entities.bills;
 
 //import bank.dao.BillDao;
 
 import bank.Bank;
-import bank.entity.clients.Client;
+import bank.entities.clients.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -35,7 +35,7 @@ public abstract class Bill implements Serializable {
     private String name;
 
     @Column(name = "type")
-    public Bills type;
+    public BillTypes type;
 
     @ManyToOne
     @JoinColumn(name="client_id")

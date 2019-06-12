@@ -1,6 +1,7 @@
-package bank.entity.clients;
+package bank.entities.clients;
 
-import bank.entity.bills.Bill;
+import bank.entities.bills.Bill;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.NoSuchElementException;
 
 @Entity
 @Table(name = "client")
+@Component
 public class Client implements Serializable {
 
     @Id

@@ -1,8 +1,9 @@
 package bank;
 
 import bank.config.BankConfiguration;
-import bank.entity.bills.*;
-import bank.entity.clients.Client;
+import bank.entities.bills.Bill;
+import bank.entities.bills.*;
+import bank.entities.clients.Client;
 import bank.service.BillService;
 import bank.service.ClientService;
 import org.springframework.context.ApplicationContext;
@@ -29,7 +30,7 @@ public class Bank {
         return context.getBean(Bank.class);
     }
 
-    public void openBill(Client client, Bills type, String name, long money) {
+    public void openBill(Client client, BillTypes type, String name, long money) {
         BillService billService = context.getBean(BillService.class);
         Bill bill;
         switch (type) {
@@ -52,27 +53,23 @@ public class Bank {
         billService.createBill(bill);
     }
 
-    /*
-    Creating beans in main method is not really good, but here it is used to
-    check how application works entirely. Later this application will be expanded
-    to web application, so bean creation will be removed from main method.
-     */
-    public static void main(String... args) {
-        Bank bank = context.getBean(Bank.class);
 
-        Client client1 = bank.newClient("John Jones");
-
-        bank.openBill(client1, Bills.SIMPLE, "Just a bill", 10_000);
-        bank.openBill(client1, Bills.CREDIT, "First credit bill", 0);
-        CreditBill creditBill = (CreditBill) client1.getBill("First credit bill");
-        creditBill.takeMoney(10_000);
-
-
-        Client client2 = bank.newClient("Sam Smith");
-
-        bank.openBill(client2, Bills.SIMPLE, "Just a bill again", 20_000);
-        bank.openBill(client2, Bills.DEPOSIT, "My deposit bill", 1_000_000);
-    }
+//    public static void main(String... args) {
+//        Bank bank = context.getBean(Bank.class);
+//
+//        Client client1 = bank.newClient("John Jones");
+//
+//        bank.openBill(client1, BillTypes.SIMPLE, "Just a bill", 10_000);
+//        bank.openBill(client1, BillTypes.CREDIT, "First credit bill", 0);
+//        CreditBill creditBill = (CreditBill) client1.getBill("First credit bill");
+//        creditBill.takeMoney(10_000);
+//
+//
+//        Client client2 = bank.newClient("Sam Smith");
+//
+//        bank.openBill(client2, BillTypes.SIMPLE, "Just a bill again", 20_000);
+//        bank.openBill(client2, BillTypes.DEPOSIT, "My deposit bill", 1_000_000);
+//    }
 
     public Client newClient(String name) {
         Client client = context.getBean(Client.class);

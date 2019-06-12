@@ -1,10 +1,11 @@
+
 package bank.controller;
 
 import bank.Bank;
-import bank.entity.bills.CreditBill;
-import bank.entity.bills.DepositBill;
-import bank.entity.bills.SimpleBill;
-import bank.entity.clients.Client;
+import bank.entities.bills.CreditBill;
+import bank.entities.bills.DepositBill;
+import bank.entities.bills.SimpleBill;
+import bank.entities.clients.Client;
 import bank.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/{clientId}")
+@RequestMapping("/clients/{clientId}")
 public class BillController {
     private Bank bank;
 
@@ -47,7 +48,7 @@ public class BillController {
         client.addBill(bill);
         billService.createBill(bill);
         model.addAttribute(client);
-        return "redirect:/{clientId}";
+        return "redirect:/clients/{clientId}";
     }
 
     @RequestMapping(value = "/credit", method = RequestMethod.POST)
@@ -57,7 +58,7 @@ public class BillController {
         client.addBill(bill);
         billService.createBill(bill);
         model.addAttribute(client);
-        return "redirect:/{clientId}";
+        return "redirect:/clients/{clientId}";
     }
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
@@ -67,7 +68,7 @@ public class BillController {
         client.addBill(bill);
         billService.createBill(bill);
         model.addAttribute(client);
-        return "redirect:/{clientId}";
+        return "redirect:/clients/{clientId}";
     }
 
     @RequestMapping(value = "/simple", method = RequestMethod.GET)

@@ -1,11 +1,11 @@
 package bank.config;
 
 
-import bank.entity.bills.Bill;
-import bank.entity.bills.CreditBill;
-import bank.entity.bills.DepositBill;
-import bank.entity.bills.SimpleBill;
-import bank.entity.clients.Client;
+import bank.entities.bills.Bill;
+import bank.entities.bills.CreditBill;
+import bank.entities.bills.DepositBill;
+import bank.entities.bills.SimpleBill;
+import bank.entities.clients.Client;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

@@ -58,7 +58,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
         session.delete(entity);
         transaction.commit();
         session.close();
-}
+    }
 
     public void deleteById(long entityId) {
         T entity = findOne(entityId);

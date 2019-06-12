@@ -1,7 +1,7 @@
 package bank.service;
 
 import bank.dao.AbstractHibernateDao;
-import bank.entity.clients.Client;
+import bank.entities.clients.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

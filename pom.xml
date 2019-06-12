@@ -25,14 +25,15 @@
         <junit.version>4.11</junit.version>
         <hibernate.version>5.4.2.Final</hibernate.version>
         <h2.version>1.4.199</h2.version>
-        <spring.version>5.1.1.RELEASE</spring.version><!--5.1.6.RELEASE-->
+        <spring.version>LATEST</spring.version><!--5.1.6.RELEASE-->
         <aspectj.version>1.9.3</aspectj.version>
-        <swagger.version>2.9.2</swagger.version>
+        <swagger.version>LATEST</swagger.version>
         <slf4j.version>1.7.26</slf4j.version>
         <jstl.version>1.2</jstl.version>
         <maven-compiler-pligin.version>2.3.2</maven-compiler-pligin.version>
         <maven-war-plugin.version>2.4</maven-war-plugin.version>
         <javassist.version>3.18.2-GA</javassist.version>
+        <jackson.version>LATEST</jackson.version>
     </properties>
 
     <!-- Some third-party libraries for our project-->
@@ -87,7 +88,7 @@
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
+            <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
         </dependency>
         <dependency>
@@ -102,29 +103,56 @@
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>${jstl.version}</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <!--JACKSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>${javassist.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--<artifactId>jackson-databind</artifactId>-->
-            <!--<version>2.9.6</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.tomcat</groupId>-->
-            <!--<artifactId>tomcat-dbcp</artifactId>-->
-            <!--<version>7.0.55</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-orm</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!--END JACKSON-->
+        <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <version>${jstl.version}</version>
+        </dependency>
+        <dependency>
+        <groupId>org.javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>${javassist.version}</version>
+        </dependency>
+        <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-dbcp</artifactId>
+        <version>7.0.55</version>
+        </dependency>
+        <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-orm</artifactId>
+        <version>${spring.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

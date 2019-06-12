@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Welcome to Bank</h1>
-<a href="<c:url value="/clients" />">Clients</a> |
+<a href="<c:url value="" />">Clients</a> |
 <a href="<c:url value="/register" />">Registration page</a>
 </body>
 </html>

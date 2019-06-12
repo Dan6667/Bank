@@ -1,4 +1,6 @@
-package bank.entity.bills;
+package bank.entities.bills;
+
+import org.springframework.stereotype.Component;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -7,6 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "bill")
 @DiscriminatorValue("S")
+@Component
 public class SimpleBill extends Bill{
 
 
@@ -19,7 +22,7 @@ public class SimpleBill extends Bill{
     }
 
     public SimpleBill(){
-        type = Bills.SIMPLE;
+        type = BillTypes.SIMPLE;
     }
 
     @Override

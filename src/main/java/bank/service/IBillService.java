@@ -1,6 +1,6 @@
 package bank.service;
 
-import bank.entity.bills.Bill;
+import bank.entities.bills.Bill;
 
 import java.util.List;
 

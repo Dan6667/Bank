@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/")
-public class ClientController {
+@RequestMapping("/clients")
+public class ClientsController {
     private Bank bank;
 
     @Autowired
-    public ClientController(Bank bank){
+    public ClientsController(Bank bank){
         this.bank = bank;
     }
 
-    @RequestMapping(value = "/clients", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String getClients(Model model){
         model.addAttribute(bank.getClients());
         return "clients";

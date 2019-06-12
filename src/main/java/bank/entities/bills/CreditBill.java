@@ -1,6 +1,7 @@
-package bank.entity.bills;
+package bank.entities.bills;
 
 import bank.BillRates;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "bill")
 @DiscriminatorValue("C")
+@Component
 public class CreditBill extends Bill{
 
     @Transient
@@ -26,7 +28,7 @@ public class CreditBill extends Bill{
     }
 
     public CreditBill(){
-        type = Bills.CREDIT;
+        type = BillTypes.CREDIT;
     }
 
     @Override

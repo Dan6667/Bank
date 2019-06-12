@@ -7,7 +7,7 @@
 <H1>Clients:</H1><br/>
 <ul class="clientList">
     <c:forEach items="${clientList}" var="client" >
-        <a href = "<c:url value="/${client.id}" />"><c:out value = "${client.name}"/></a><br/>
+        <a href = "<c:url value="/clients/${client.id}" />"><c:out value = "${client.name}"/></a><br/>
     </c:forEach>
 </ul>
 </body>
