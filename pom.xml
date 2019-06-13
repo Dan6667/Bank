@@ -34,6 +34,7 @@
         <maven-war-plugin.version>2.4</maven-war-plugin.version>
         <javassist.version>3.18.2-GA</javassist.version>
         <jackson.version>LATEST</jackson.version>
+        <javax.servlet.version>3.1.0</javax.servlet.version>
     </properties>
 
     <!-- Some third-party libraries for our project-->
@@ -104,7 +105,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>${javax.servlet.version}</version>
         </dependency>
         <!--JACKSON-->
         <dependency>
