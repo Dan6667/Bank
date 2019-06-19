@@ -1,7 +1,6 @@
 package bank;
 
 import bank.config.BankConfiguration;
-import bank.entities.bills.Bill;
 import bank.entities.bills.*;
 import bank.entities.clients.Client;
 import bank.service.BillService;
@@ -54,22 +53,26 @@ public class Bank {
     }
 
 
-//    public static void main(String... args) {
-//        Bank bank = context.getBean(Bank.class);
-//
-//        Client client1 = bank.newClient("John Jones");
-//
-//        bank.openBill(client1, BillTypes.SIMPLE, "Just a bill", 10_000);
-//        bank.openBill(client1, BillTypes.CREDIT, "First credit bill", 0);
-//        CreditBill creditBill = (CreditBill) client1.getBill("First credit bill");
-//        creditBill.takeMoney(10_000);
-//
-//
-//        Client client2 = bank.newClient("Sam Smith");
-//
-//        bank.openBill(client2, BillTypes.SIMPLE, "Just a bill again", 20_000);
-//        bank.openBill(client2, BillTypes.DEPOSIT, "My deposit bill", 1_000_000);
-//    }
+    public static void main(String... args) {
+        Bank bank = context.getBean(Bank.class);
+
+        Client client1 = bank.newClient("John Jones");
+
+        bank.openBill(client1, BillTypes.SIMPLE, "Just a bill", 10_000);
+        bank.openBill(client1, BillTypes.CREDIT, "First credit bill", 0);
+        CreditBill creditBill = (CreditBill) client1.getBill("First credit bill");
+        creditBill.takeMoney(10_000);
+
+
+        Client client2 = bank.newClient("Sam Smith");
+
+        bank.openBill(client2, BillTypes.SIMPLE, "Just a bill again", 20_000);
+        bank.openBill(client2, BillTypes.DEPOSIT, "My deposit bill", 1_000_000);
+
+        ClientService cs = context.getBean(ClientService.class);
+        List list = cs.findFieldsFromClientAndBill(client1, "id", "name");
+        System.out.println("found");
+    }
 
     public Client newClient(String name) {
         Client client = context.getBean(Client.class);

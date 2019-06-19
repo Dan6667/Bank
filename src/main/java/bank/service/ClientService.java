@@ -1,6 +1,7 @@
 package bank.service;
 
 import bank.dao.AbstractHibernateDao;
+import bank.dao.GenericHibernateDao;
 import bank.entities.clients.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ public class ClientService implements IClientService {
     private AbstractHibernateDao<Client> dao;
 
     @Autowired
-    public void setDao(AbstractHibernateDao<Client> daoToSet) {
+    public void setDao(GenericHibernateDao<Client> daoToSet) {
         dao = daoToSet;
         dao.setClazz(Client.class);
     }
@@ -39,5 +40,9 @@ public class ClientService implements IClientService {
 
     public void deleteClientById(final long clientId){
         dao.deleteById(clientId);
+    }
+
+    public List<Client> findFieldsFromClientAndBill(Client client, String clientField, String billField){
+        return dao.findFieldsFromClientAndBill(client, clientField, billField);
     }
 }

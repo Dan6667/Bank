@@ -68,4 +68,6 @@ public abstract class AbstractHibernateDao<T extends Serializable> {
     protected final Session getCurrentSession() {
         return HibernateUtil.getSessionFactory().openSession();
     }
+
+    public abstract List<T> findFieldsFromClientAndBill(T client, String clientField, String billField);
 }

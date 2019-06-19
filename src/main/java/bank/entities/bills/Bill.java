@@ -3,6 +3,7 @@ package bank.entities.bills;
 //import bank.dao.BillDao;
 
 import bank.Bank;
+import bank.entities.BankEntity;
 import bank.entities.clients.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,7 +18,7 @@ import java.io.Serializable;
         discriminatorType=DiscriminatorType.STRING
 )
 @DiscriminatorValue(value="B")
-public abstract class Bill implements Serializable {
+public abstract class Bill extends BankEntity implements Serializable {
 
     @Transient
     @Autowired

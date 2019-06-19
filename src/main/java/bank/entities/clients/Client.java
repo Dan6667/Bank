@@ -1,6 +1,8 @@
 package bank.entities.clients;
 
+import bank.entities.BankEntity;
 import bank.entities.bills.Bill;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -12,7 +14,8 @@ import java.util.NoSuchElementException;
 @Entity
 @Table(name = "client")
 @Component
-public class Client implements Serializable {
+@Scope("prototype")
+public class Client extends BankEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,5 +74,10 @@ public class Client implements Serializable {
 
     public long getId(){
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Client";
     }
 }

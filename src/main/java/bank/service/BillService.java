@@ -2,7 +2,6 @@ package bank.service;
 
 import bank.dao.GenericHibernateDao;
 import bank.entities.bills.Bill;
-import bank.entities.clients.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +21,9 @@ public class BillService implements IBillService {
         return dao.findOne(id);
     }
 
-    public List<Bill> findClientBills(Client client){
-        return dao.findEntityWhere(client);
-    }
+//    public List<Bill> findClientBills(Client client){
+//        return dao.findEntityWhere(client);
+//    }
 
     public List<Bill> findAllBills(){
         return dao.findAll();
